@@ -1,32 +1,41 @@
-# recommend.py
+# src/recommend.py
 import joblib
 import logging
 import streamlit as st
+import os
 from sklearn.metrics.pairwise import cosine_similarity
 
 # Setup logging
-logging.basicConfig(
-    level=logging.INFO,
-    format='[%(asctime)s] %(levelname)s - %(message)s',
-    handlers=[
-        logging.FileHandler("recommend.log", encoding="utf-8"),
-        logging.StreamHandler()
-    ]
-)
+logging.basicConfig(level=logging.INFO, format='[%(asctime)s] %(levelname)s - %(message)s')
 
 @st.cache_data
 def load_data():
-    """Loads the preprocessed data from disk and caches it."""
+    """Loads the preprocessed data using direct relative paths."""
     logging.info("🔁 Loading data from disk...")
+    
+    # Use direct paths relative to the project root, which is where Streamlit runs from.
+    df_path = 'src/df_full_cleaned.pkl'
+    matrix_path = 'src/tfidf_matrix_full.pkl'
+
     try:
-        # --- KEY CHANGE: Loading new files ---
-        df = joblib.load('df_full_cleaned.pkl')
-        tfidf_matrix = joblib.load('tfidf_matrix_full.pkl')
+        df = joblib.load(df_path)
+        tfidf_matrix = joblib.load(matrix_path)
         logging.info("✅ Data loaded successfully.")
         return df, tfidf_matrix
-    except FileNotFoundError:
-        logging.error("❌ Failed to load required files. Make sure to run the updated preprocess.py first.")
-        st.error("Data files not found. Please run the preprocessing script first.")
+    except FileNotFoundError as e:
+        logging.error(f"❌ Could not find data files. Attempted to load from: {df_path} and {matrix_path}. Error: {e}")
+        st.error(f"Data files not found. Please ensure they exist in the 'src' directory in your GitHub repository.")
+        
+        # Debug block to show what the server sees
+        st.write("--- Debug Info ---")
+        st.write(f"**Current Working Directory:** `{os.getcwd()}`")
+        st.write(f"**Files in Root Directory:** `{os.listdir('.')}`")
+        if os.path.exists('src'):
+            st.write(f"**Files in 'src' Directory:** `{os.listdir('src')}`")
+        else:
+            st.write("'src' directory not found.")
+        st.write("--- End Debug Info ---")
+        
         return None, None
     except Exception as e:
         logging.error("❌ An unexpected error occurred while loading files: %s", str(e))
@@ -37,26 +46,18 @@ def recommend_songs(df, tfidf_matrix, song_name, top_n=5):
     """Recommends songs by calculating similarity on the fly."""
     if df is None or tfidf_matrix is None:
         return None
-        
-    logging.info("🎵 Recommending songs for: '%s'", song_name)
-    
     try:
         idx = df[df['song'].str.lower() == song_name.lower()].index[0]
     except IndexError:
-        logging.warning("⚠️ Song '%s' not found in dataset.", song_name)
         return None
     
-    # --- KEY CHANGE: Calculate similarity here ---
     song_vector = tfidf_matrix[idx]
     sim_scores = cosine_similarity(song_vector, tfidf_matrix)[0]
     
-    # Enumerate scores and sort them
     sim_scores_enum = list(enumerate(sim_scores))
     sim_scores_sorted = sorted(sim_scores_enum, key=lambda x: x[1], reverse=True)[1:top_n + 1]
     
     song_indices = [i[0] for i in sim_scores_sorted]
-    
-    logging.info("✅ Top %d recommendations ready.", top_n)
     return df.iloc[song_indices]
 
 def recommend_by_artist(df, tfidf_matrix, artist_name, top_n=5):
@@ -64,17 +65,12 @@ def recommend_by_artist(df, tfidf_matrix, artist_name, top_n=5):
     if df is None or tfidf_matrix is None:
         return None
 
-    logging.info("🎤 Recommending songs for artist: '%s'", artist_name)
-    
     artist_songs = df[df['artist'].str.lower() == artist_name.lower()]
     
     if artist_songs.empty:
-        logging.warning("⚠️ Artist '%s' not found in dataset.", artist_name)
         return None
         
     first_song_idx = artist_songs.index[0]
-
-    # --- KEY CHANGE: Calculate similarity here ---
     artist_song_vector = tfidf_matrix[first_song_idx]
     sim_scores = cosine_similarity(artist_song_vector, tfidf_matrix)[0]
 
@@ -88,5 +84,4 @@ def recommend_by_artist(df, tfidf_matrix, artist_name, top_n=5):
         if len(recommendations) >= top_n:
             break
             
-    logging.info("✅ Top %d artist-based recommendations ready.", top_n)
     return df.iloc[recommendations]
