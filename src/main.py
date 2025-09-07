@@ -3,14 +3,18 @@ import streamlit as st
 from recommend import load_data, recommend_songs, recommend_by_artist
 
 import joblib
-import pandas as pd
+import os
 
-# Load files directly by name, as they are in the same 'src' folder
-df = joblib.load('df_full_cleaned.pkl')
-vectorizer = joblib.load('tfidf_vectorizer.pkl')
-tfidf_matrix = joblib.load('tfidf_matrix_full.pkl')
-song_data = pd.read_csv('spotify_milsongdata.csv')
+# Get the absolute path of the directory the current script (main.py) is in
+script_dir = os.path.dirname(os.path.abspath(__file__))
 
+# Join the script's directory with the filename
+df_path = os.path.join(script_dir, 'df_full_cleaned.pkl')
+vectorizer_path = os.path.join(script_dir, 'tfidf_vectorizer.pkl')
+
+# Load the files using the robust, absolute paths
+df = joblib.load(df_path)
+vectorizer = joblib.load(vectorizer_path)
 # --- 1. Page Configuration ---
 st.set_page_config(
     page_title="MeloMix 🎵 - Music Recommender",
