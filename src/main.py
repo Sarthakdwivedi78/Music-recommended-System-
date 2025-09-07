@@ -1,16 +1,12 @@
 # app.py
 import streamlit as st
 from recommend import load_data, recommend_songs, recommend_by_artist
-
 import joblib
-import os
-
-# Get the absolute path of the directory the current script (main.py) is in
-script_dir = os.path.dirname(os.path.abspath(__file__))
-
-# Join the script's directory with the filename
-df_path = os.path.join(script_dir, 'df_full_cleaned.pkl')
-vectorizer_path = os.path.join(script_dir, 'tfidf_vectorizer.pkl')
+import pandas as pd
+df = joblib.load('src/df_full_cleaned.pkl')
+vectorizer = joblib.load('src/tfidf_vectorizer.pkl')
+tfidf_matrix = joblib.load('src/tfidf_matrix_full.pkl')
+song_data = pd.read_csv('src/spotify_milsongdata.csv')
 
 # Load the files using the robust, absolute paths
 df = joblib.load(df_path)
