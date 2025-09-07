@@ -3,10 +3,7 @@ import streamlit as st
 from recommend import load_data, recommend_songs, recommend_by_artist
 import joblib
 import pandas as pd
-df = joblib.load('src/df_full_cleaned.pkl')
-vectorizer = joblib.load('src/tfidf_vectorizer.pkl')
-tfidf_matrix = joblib.load('src/tfidf_matrix_full.pkl')
-song_data = pd.read_csv('src/spotify_milsongdata.csv')
+
 
 # Load the files using the robust, absolute paths
 df = joblib.load(df_path)
