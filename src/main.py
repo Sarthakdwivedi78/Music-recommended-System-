@@ -2,6 +2,13 @@
 import streamlit as st
 from recommend import load_data, recommend_songs, recommend_by_artist
 
+import joblib
+
+# Go up one directory from src/ to find the file
+df = joblib.load('../df_full_cleaned.pkl')
+vectorizer = joblib.load('../tfidf_vectorizer.pkl')
+tfidf_matrix = joblib.load('../tfidf_matrix_full.pkl')
+
 # --- 1. Page Configuration ---
 st.set_page_config(
     page_title="MeloMix 🎵 - Music Recommender",
