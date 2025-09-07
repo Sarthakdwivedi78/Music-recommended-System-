@@ -26,3 +26,15 @@
 [2025-09-07 17:00:26,925] INFO - ✅ Top 5 artist-based recommendations ready.
 [2025-09-07 17:00:46,828] INFO - 🎵 Recommending songs for: 'Blue'
 [2025-09-07 17:00:46,850] INFO - ✅ Top 5 recommendations ready.
+[2025-09-07 17:08:48,972] INFO - 🔁 Loading data from disk...
+[2025-09-07 17:08:49,461] INFO - ✅ Data loaded successfully.
+[2025-09-07 17:09:08,021] INFO - 🎵 Recommending songs for: ''Cause I Love You'
+[2025-09-07 17:09:08,812] INFO - ✅ Top 5 recommendations ready.
+[2025-09-07 17:09:16,447] INFO - 🎵 Recommending songs for: ''Cause I Love You'
+[2025-09-07 17:09:16,759] INFO - ✅ Top 13 recommendations ready.
+[2025-09-07 17:09:36,014] INFO - 🎤 Recommending songs for artist: 'Taylor Swift'
+[2025-09-07 17:09:36,294] INFO - ✅ Top 13 artist-based recommendations ready.
+[2025-09-07 17:54:28,675] INFO - 🎤 Recommending songs for artist: 'Taylor Swift'
+[2025-09-07 17:54:28,904] INFO - ✅ Top 15 artist-based recommendations ready.
+[2025-09-07 18:18:14,032] INFO - 🎤 Recommending songs for artist: 'Air Supply'
+[2025-09-07 18:18:14,235] INFO - ✅ Top 15 artist-based recommendations ready.

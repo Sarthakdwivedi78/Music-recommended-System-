@@ -4,6 +4,7 @@ import re
 import nltk
 import joblib
 import logging
+from pathlib import Path  # Make sure to import Path
 from nltk.corpus import stopwords
 from nltk.tokenize import word_tokenize
 from sklearn.feature_extraction.text import TfidfVectorizer
@@ -31,11 +32,21 @@ try:
 except nltk.downloader.DownloadError:
     nltk.download('stopwords')
 
-# Load the FULL dataset
+# Load the FULL dataset using a reliable path
 try:
-    # --- KEY CHANGE: REMOVED .sample() TO USE ALL DATA ---
-    df = pd.read_csv("spotify_millsongdata.csv")
+    # Get the directory of the current script
+    script_dir = Path(__file__).parent
+    # Create the full path to the data file
+    data_file_path = script_dir / "spotify_millsongdata.csv"
+    
+    # Read the CSV using the full path
+    df = pd.read_csv(data_file_path)
     logging.info("✅ Full dataset loaded: %d rows", len(df))
+
+except FileNotFoundError:
+    logging.error(f"❌ Data file not found at {data_file_path}. Please ensure 'spotify_millsongdata.csv' is in the same directory as this script.")
+    # Exit if the file is not found
+    exit()
 except Exception as e:
     logging.error("❌ Failed to load dataset: %s", str(e))
     raise e
@@ -60,16 +71,16 @@ logging.info("✅ Text cleaned.")
 
 # Vectorization
 logging.info("🔠 Vectorizing using TF-IDF...")
-tfidf = TfidfVectorizer(max_features=5000) # Using 5000 features is a good balance
+tfidf = TfidfVectorizer(max_features=5000)
 tfidf_matrix = tfidf.fit_transform(df['cleaned_text'])
 logging.info("✅ TF-IDF matrix shape: %s", tfidf_matrix.shape)
 
-# --- KEY CHANGE: NO LONGER CALCULATING OR SAVING THE COSINE SIMILARITY MATRIX ---
-
 # Save the necessary components
-joblib.dump(df, 'df_full_cleaned.pkl')
-joblib.dump(tfidf_matrix, 'tfidf_matrix_full.pkl')
-joblib.dump(tfidf, 'tfidf_vectorizer.pkl') # Save the vectorizer itself
+# Note: Saving files in the same directory as the script
+output_dir = Path(__file__).parent
+joblib.dump(df, output_dir / 'df_full_cleaned.pkl')
+joblib.dump(tfidf_matrix, output_dir / 'tfidf_matrix_full.pkl')
+joblib.dump(tfidf, output_dir / 'tfidf_vectorizer.pkl')
 logging.info("💾 Data, TF-IDF matrix, and vectorizer saved to disk.")
 
 logging.info("✅ Preprocessing complete.")
