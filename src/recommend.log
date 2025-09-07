@@ -1,0 +1,28 @@
+[2025-09-07 16:27:25,180] INFO - 🔁 Loading data...
+[2025-09-07 16:27:25,514] INFO - Note: NumExpr detected 18 cores but "NUMEXPR_MAX_THREADS" not set, so enforcing safe limit of 16.
+[2025-09-07 16:27:25,517] INFO - NumExpr defaulting to 16 threads.
+[2025-09-07 16:27:26,306] INFO - ✅ Data loaded successfully.
+[2025-09-07 16:27:41,546] INFO - 🔁 Loading data...
+[2025-09-07 16:27:41,691] INFO - Note: NumExpr detected 18 cores but "NUMEXPR_MAX_THREADS" not set, so enforcing safe limit of 16.
+[2025-09-07 16:27:41,692] INFO - NumExpr defaulting to 16 threads.
+[2025-09-07 16:27:43,546] INFO - ✅ Data loaded successfully.
+[2025-09-07 16:27:55,742] INFO - 🎵 Recommending songs for: ''69'
+[2025-09-07 16:27:55,806] INFO - ✅ Top 5 recommendations ready.
+[2025-09-07 16:28:44,769] INFO - 🎵 Recommending songs for: ''69'
+[2025-09-07 16:28:44,803] INFO - ✅ Top 5 recommendations ready.
+[2025-09-07 16:29:08,822] INFO - 🎵 Recommending songs for: 'Any Other Fool'
+[2025-09-07 16:29:08,866] INFO - ✅ Top 5 recommendations ready.
+[2025-09-07 16:31:04,221] INFO - 🎵 Recommending songs for: 'Any Other Fool'
+[2025-09-07 16:31:04,246] INFO - ✅ Top 5 recommendations ready.
+[2025-09-07 16:31:11,799] INFO - 🎵 Recommending songs for: '(she's My) Solid Booze'
+[2025-09-07 16:31:11,834] INFO - ✅ Top 5 recommendations ready.
+[2025-09-07 16:56:06,887] INFO - 🔁 Loading data from disk...
+[2025-09-07 16:56:07,879] INFO - ✅ Data loaded successfully.
+[2025-09-07 16:59:28,622] INFO - 🔁 Loading data from disk...
+[2025-09-07 16:59:29,142] INFO - ✅ Data loaded successfully.
+[2025-09-07 16:59:52,438] INFO - 🎤 Recommending songs for artist: 'Taylor Swift'
+[2025-09-07 16:59:52,482] INFO - ✅ Top 5 artist-based recommendations ready.
+[2025-09-07 17:00:26,912] INFO - 🎤 Recommending songs for artist: 'Bryan White'
+[2025-09-07 17:00:26,925] INFO - ✅ Top 5 artist-based recommendations ready.
+[2025-09-07 17:00:46,828] INFO - 🎵 Recommending songs for: 'Blue'
+[2025-09-07 17:00:46,850] INFO - ✅ Top 5 recommendations ready.
