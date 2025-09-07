@@ -3,11 +3,13 @@ import streamlit as st
 from recommend import load_data, recommend_songs, recommend_by_artist
 
 import joblib
+import pandas as pd
 
-# Go up one directory from src/ to find the file
-df = joblib.load('../df_full_cleaned.pkl')
-vectorizer = joblib.load('../tfidf_vectorizer.pkl')
-tfidf_matrix = joblib.load('../tfidf_matrix_full.pkl')
+# Load files directly by name, as they are in the same 'src' folder
+df = joblib.load('df_full_cleaned.pkl')
+vectorizer = joblib.load('tfidf_vectorizer.pkl')
+tfidf_matrix = joblib.load('tfidf_matrix_full.pkl')
+song_data = pd.read_csv('spotify_milsongdata.csv')
 
 # --- 1. Page Configuration ---
 st.set_page_config(
