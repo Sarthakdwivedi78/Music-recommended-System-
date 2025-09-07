@@ -38,3 +38,7 @@
 [2025-09-07 17:54:28,904] INFO - ✅ Top 15 artist-based recommendations ready.
 [2025-09-07 18:18:14,032] INFO - 🎤 Recommending songs for artist: 'Air Supply'
 [2025-09-07 18:18:14,235] INFO - ✅ Top 15 artist-based recommendations ready.
+[2025-09-07 18:35:36,644] INFO - 🔁 Loading data from disk...
+[2025-09-07 18:35:37,101] INFO - ✅ Data loaded successfully.
+[2025-09-07 18:35:48,481] INFO - 🎵 Recommending songs for: ''Cross The Green Mountain'
+[2025-09-07 18:35:48,945] INFO - ✅ Top 5 recommendations ready.
